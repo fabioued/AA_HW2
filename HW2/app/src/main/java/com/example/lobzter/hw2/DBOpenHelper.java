@@ -8,13 +8,12 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
 	
 	public DBOpenHelper(Context context) {
-		super(context, "note.db", null, 1);
+		super(context, "latlng.db", null, 1);
 	}
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL("create table " +
-				NoteDB.NOTETABLE + "(title, latitude, longitude);");
+		db.execSQL("create table latlng(title, latitude, longitude);");
 	}
 	
 	@Override

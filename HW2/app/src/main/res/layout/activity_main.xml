@@ -1,19 +1,22 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
+    android:padding="10dp">
+
+    <ListView
+        android:id="@+id/lv_notes"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/btn_addnote"
+        />
     <Button
         android:id="@+id/btn_addnote"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:textSize="20sp"
-		android:text="CREATE"
+        android:text="CREATE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_alignParentBottom="true"
         />
-	<ListView
-		android:id="@+id/lv_notes"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		/>
-</LinearLayout>
+</RelativeLayout>

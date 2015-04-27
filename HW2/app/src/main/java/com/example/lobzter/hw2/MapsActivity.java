@@ -2,7 +2,6 @@ package com.example.lobzter.hw2;
 
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -14,15 +13,10 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
-
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    int notepos;
-    String title, latitude = "0", longitude = "0";
-    ArrayList<String> titlelist;
-    SQLiteDatabase db;
+    double latitude, longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +25,8 @@ public class MapsActivity extends FragmentActivity {
         setContentView(R.layout.activity_maps);
 
         Intent intent = getIntent();
-        notepos = intent.getIntExtra("NOTEPOS", -1);
-
-        DBOpenHelper openhelper = new DBOpenHelper(this);
-        db = openhelper.getWritableDatabase();
-        titlelist = NoteDB.getTitleList(db);
-        title = titlelist.get(notepos);
-        latitude = NoteDB.getLatitude(db, title);
-        longitude = NoteDB.getLongitude(db, title);
+        latitude = intent.getDoubleExtra("LAT", 0.0);
+        longitude = intent.getDoubleExtra("LNG", 0.0);
 
         setUpMapIfNeeded();
 
@@ -86,9 +74,9 @@ public class MapsActivity extends FragmentActivity {
      */
     private void setUpMap() {
 
-        LatLng latlng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+        LatLng latlng = new LatLng(latitude, longitude);
 
-        mMap.addMarker(new MarkerOptions().position(latlng).title("title"));
+        mMap.addMarker(new MarkerOptions().position(latlng));
 
         mMap.setMyLocationEnabled(true);
 
